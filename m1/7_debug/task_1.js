@@ -3,7 +3,7 @@ console.log(health);
 
 debugger;
 
-if (health === NaN || health < 0) {
+if (isNaN(health) || health < 0) {
   alert('Параметр "здоровье" должен быть больше нуля!')
 } else {
   alert(`Параметр "здоровье" равен ${health}`);

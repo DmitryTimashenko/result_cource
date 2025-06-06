@@ -1,7 +1,6 @@
 function getDivisorsCount(number) {
     number = Number(number);
-    
-    if (number === NaN) {
+    if (isNaN(number)) {
         return NaN;
     }
   

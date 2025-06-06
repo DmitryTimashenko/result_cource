@@ -1,6 +1,6 @@
 function getSumOfNumbers(number, type = "odd") {
     number = Number(number);
-    if (number === NaN) {
+    if (isNaN(number)) {
         return NaN;
     }
 
