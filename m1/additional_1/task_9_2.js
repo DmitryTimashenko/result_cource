@@ -3,7 +3,7 @@ function getMathResult(expression) {
 
     expression = expression.map(val => operations.includes(val) ? val : Number(val)).filter(Boolean);
 
-    if (expression.length !== 3 && !operations.includes(expression[0]) && operations.includes(expression[1]) && !operations.includes(expression[2])) {
+    if (expression.length !== 3 || operations.includes(expression[0]) || !operations.includes(expression[1]) || operations.includes(expression[2])) {
         return 'Ошибка';
     }
 
