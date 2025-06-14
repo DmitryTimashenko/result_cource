@@ -1,6 +1,3 @@
-Array.isArray()
-
-
 function getAdultUsers(users) {
   if (Array.isArray(users)) {
     return users.filter(usr => usr.age >= 18);
