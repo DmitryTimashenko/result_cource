@@ -18,19 +18,64 @@ const tasks = [
 
 const tasksList = document.querySelector('.tasks-list');
 
-tasksList.innerHTML = tasks.map(task => `
-    <div class="task-item" data-task-id="${task.id}">
-        <div class="task-item__main-container">
-            <div class="task-item__main-content">
-                <form class="checkbox-form">
-                    <input class="checkbox-form__checkbox" type="checkbox" id="task-${task.id}" ${task.completed ? 'checked' : ''}>
-                    <label for="task-${task.id}"></label>
-                </form>
-                <span class="task-item__text">${task.text}</span>
-            </div>
-            <button class="task-item__delete-button default-button delete-button">
-                Удалить
-            </button>
-        </div>
-    </div>
-`).join('');
+const createTaskItem = task => {
+    // Создаем основной контейнер задачи
+    const taskItem = document.createElement('div');
+    taskItem.className = 'task-item';
+    taskItem.setAttribute('data-task-id', task.id);
+    
+    // Создаем внутренний контейнер
+    const mainContainer = document.createElement('div');
+    mainContainer.className = 'task-item__main-container';
+    
+    // Создаем контейнер для основного содержимого
+    const mainContent = document.createElement('div');
+    mainContent.className = 'task-item__main-content';
+    
+    // Создаем форму с чекбоксом
+    const checkboxForm = document.createElement('form');
+    checkboxForm.className = 'checkbox-form';
+    
+    const checkboxInput = document.createElement('input');
+    checkboxInput.className = 'checkbox-form__checkbox';
+    checkboxInput.type = 'checkbox';
+    checkboxInput.id = `task-${task.id}`;
+    if (task.completed) {
+        checkboxInput.checked = true;
+    }
+    
+    const checkboxLabel = document.createElement('label');
+    checkboxLabel.htmlFor = `task-${task.id}`;
+    
+    checkboxForm.appendChild(checkboxInput);
+    checkboxForm.appendChild(checkboxLabel);
+    
+    // Создаем текст задачи
+    const taskText = document.createElement('span');
+    taskText.className = 'task-item__text';
+    taskText.textContent = task.text;
+    
+    // Добавляем чекбокс и текст в основной контент
+    mainContent.appendChild(checkboxForm);
+    mainContent.appendChild(taskText);
+    
+    // Создаем кнопку удаления
+    const deleteButton = document.createElement('button');
+    deleteButton.className = 'task-item__delete-button default-button delete-button';
+    deleteButton.textContent = 'Удалить';
+    
+    // Добавляем основной контент и кнопку удаления во внутренний контейнер
+    mainContainer.appendChild(mainContent);
+    mainContainer.appendChild(deleteButton);
+    
+    // Добавляем внутренний контейнер в основной элемент задачи
+    taskItem.appendChild(mainContainer);
+
+    return taskItem;
+}
+
+tasks.forEach(task => {
+    const taskItem = createTaskItem(task);
+    // Добавляем задачу в список
+    tasksList.appendChild(taskItem);
+});
