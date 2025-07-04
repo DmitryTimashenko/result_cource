@@ -16,8 +16,6 @@ const tasks = [
     },
 ];
 
-const tasksList = document.querySelector('.tasks-list');
-
 const createTaskItem = task => {
     // Создаем основной контейнер задачи
     const taskItem = document.createElement('div');
@@ -74,8 +72,15 @@ const createTaskItem = task => {
     return taskItem;
 }
 
-tasks.forEach(task => {
-    const taskItem = createTaskItem(task);
-    // Добавляем задачу в список
-    tasksList.appendChild(taskItem);
-});
+const renderTasks = () => {
+    const tasksList = document.querySelector('.tasks-list');
+    tasksList.innerHTML = ''; // Очищаем список перед перерисовкой
+
+    tasks.forEach(task => {
+        const taskItem = createTaskItem(task);
+        // Добавляем задачу в список
+        tasksList.appendChild(taskItem);
+    });
+}
+
+renderTasks();
