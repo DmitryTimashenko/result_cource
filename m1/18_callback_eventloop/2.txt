@@ -1,0 +1,5 @@
+before promise
+One
+Zero
+Zero Promise
+Zero Promise Invoked
